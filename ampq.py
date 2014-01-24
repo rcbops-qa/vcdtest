@@ -41,9 +41,11 @@ class AmqpConnection:
         # Receive a message
         channel.basic_consume(callback, queue=queue, no_ack=True)
 
-        # Contiume consuming
-        channel.start_consuming()
-
-    def close(self):
+        try:
+            channel.start_consuming()
+        except KeyboardInterrupt:
+            channel.stop_consuming()
+        except Exception:
+            self.connect
+            self.receive(callback, queue)
         self.connection.close()
-        self.connection = None
