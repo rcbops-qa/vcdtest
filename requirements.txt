@@ -1,2 +1,2 @@
 pika
-argh
+argh>=0.24.1
