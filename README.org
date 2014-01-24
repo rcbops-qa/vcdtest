@@ -13,7 +13,7 @@ Fill out:
 Then setup with:
 
 #+BEGIN_SRC sh
-  export VCLOUD_API_ROOT=https://vcloud.server.com/api
+  export VCLOUD_API_ROOT=$VCLOUD_ROOT/api
   export VCLOUD_AUTH_TOKEN=`curl -s -i -k -H "Accept:application/*+xml;version=1.5" -u "$USER@$ORG:$PASSWORD' -X POST $VCLOUD_ROOT/api/sessions | grep x-vcloud-authorization | awk '{print $2}'`
 #+END_SRC
 
