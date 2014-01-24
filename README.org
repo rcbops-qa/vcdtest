@@ -1,0 +1,24 @@
+A test bed for working with vcloud director
+
+the log events
+
+Fill out:
+
+#+BEGIN_SRC sh
+  export VCLOUD_ROOT=https://vcloud.server.com
+  export VCLOUD_USER=USER
+  export VCLOUD_PASSWORD=PASSWORD
+#+END_SRC
+
+Then setup with:
+
+#+BEGIN_SRC sh
+  export VCLOUD_API_ROOT=https://vcloud.server.com/api
+  export VCLOUD_AUTH_TOKEN=`curl -s -i -k -H "Accept:application/*+xml;version=1.5" -u "$USER@$ORG:$PASSWORD' -X POST $VCLOUD_ROOT/api/sessions | grep x-vcloud-authorization | awk '{print $2}'`
+#+END_SRC
+
+To log events and their entities:
+
+#+BEGIN_SRC sh
+  ./consume.py rabbit.host.com user password virtal_host queue > log.txt
+#+END_SRC
