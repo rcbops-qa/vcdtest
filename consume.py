@@ -38,9 +38,19 @@ def callback(channel, method, header, body):
         resolve(resolver+id, name)
 
 
-def consume(host, username, password, virtual_host, queue):
+def _drain(*args):
+    print "message received"
+
+
+def drain(host, username, password, virtual_host, queue):
+    connection = AmqpConnection(host=host, username=username,
+                                password=password, virtual_host=virtual_host)
+    connection.receive(_drain, queue=queue)
+
+
+def crawl(host, username, password, virtual_host, queue):
     connection = AmqpConnection(host=host, username=username,
                                 password=password, virtual_host=virtual_host)
     connection.receive(callback, queue=queue)
 
-argh.dispatch_command(consume)
+argh.dispatch_commands([crawl, drain])
